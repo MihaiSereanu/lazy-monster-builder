@@ -1,9 +1,14 @@
 import {MONSTERS_FEATURES, MONSTERS_STATS, MONSTERS_TYPE, MONSTERS_ARCHETYPES} from './lib/monsters.js';
 import {ABILITIES, attackCount, buildMonsterData} from './actor-data.js';
+import {CONDITIONS, clearConditionApplications} from './conditions.js';
 
 const MODULE_ID = 'lazy-monster-builder';
 const FEATURES = MONSTERS_FEATURES.filter(Boolean);
 let generator;
+
+Hooks.on('deleteActiveEffect', (...args) => {
+    clearConditionApplications(...args).catch(error => console.error(`${MODULE_ID} | Could not clear a condition reminder:`, error));
+});
 
 function canGenerate() {
     return game.system.id === 'dnd5e' && game.user.can('ACTOR_CREATE');
@@ -30,11 +35,15 @@ export async function showMonsterForm() {
     const content = await foundry.applications.handlebars.renderTemplate(
         `modules/${MODULE_ID}/templates/generator.hbs`, {
             types: MONSTERS_TYPE, stats: MONSTERS_STATS, archetypes: MONSTERS_ARCHETYPES,
-            features: FEATURES, abilities: ABILITIES
+            features: FEATURES, abilities: ABILITIES,
+            nativeConditions: CONDITIONS.filter(condition => !condition.custom),
+            customConditions: CONDITIONS.filter(condition => condition.custom),
+            damageTypes: Object.entries(CONFIG.DND5E.damageTypes).map(([id, config]) => ({id, name: game.i18n.localize(config.label)}))
         }
     );
     let mode = 'cr';
     const selectedFeatures = [];
+    let previousStats;
     const dialog = new foundry.applications.api.DialogV2({
         id: 'lmb-generator', classes: ['lmb-generator'],
         window: {title: 'Create a monster', resizable: true},
@@ -44,9 +53,7 @@ export async function showMonsterForm() {
             callback: async (_event, _button, app) => {
                 if (!canGenerate()) throw new Error('You do not have permission to create actors.');
                 const root = app.element;
-                const data = buildMonsterData({stats: currentStats(root),
-                    type: MONSTERS_TYPE[Number(root.querySelector('[name="monsterType"]').value)],
-                    features: selectedFeatures,
+                const data = buildMonsterData({...selection(root),
                     saves: ABILITIES.filter(key => root.querySelector(`[name="save-${key}"]`).checked)
                 });
                 try {
@@ -69,12 +76,31 @@ export async function showMonsterForm() {
         return (mode === 'cr' ? MONSTERS_STATS : MONSTERS_ARCHETYPES)[Number(root.querySelector(`[name="${field}"]`).value)];
     }
 
+    function selection(root) {
+        return {stats: currentStats(root),
+            type: MONSTERS_TYPE[Number(root.querySelector('[name="monsterType"]').value)],
+            features: selectedFeatures,
+            hp: root.querySelector('[name="hitPoints"]').value,
+            damageType: root.querySelector('[name="damageType"]').value,
+            conditions: [...root.querySelector('[name="conditions"]').selectedOptions].map(option => option.value)
+        };
+    }
+
     function update(root) {
         const stats = currentStats(root);
+        const hp = root.querySelector('[name="hitPoints"]');
+        if (previousStats !== stats) {
+            hp.min = stats.HPLow ?? stats.HP;
+            hp.max = stats.HPHigh ?? stats.HP;
+            hp.value = stats.HP;
+            hp.disabled = !stats.HPLow;
+            root.querySelector('.lmb-hp-range').textContent = stats.HPLow ? `Range: ${stats.HPLow}–${stats.HPHigh}; default ${stats.HP}` : 'Preset hit points';
+            previousStats = stats;
+        }
         const type = MONSTERS_TYPE[Number(root.querySelector('[name="monsterType"]').value)];
         root.querySelector('.lmb-token').src = `modules/${MODULE_ID}/tokens/${type.name.toLowerCase()}.png`;
         const values = {
-            hp: stats.HP, ac: stats.ACDC, proficiency: stats.PAB,
+            hp: hp.value, ac: stats.ACDC, proficiency: stats.PAB,
             damage: `${stats.DpACalc} × ${attackCount(stats, selectedFeatures)}`,
             attack: stats.atkBonus ?? stats.PAB, level: stats.ECL ?? '—'
         };
@@ -87,6 +113,12 @@ export async function showMonsterForm() {
         }).join(', ') || 'None';
         for (const [key, value] of Object.entries(values)) root.querySelector(`[data-stat="${key}"]`).textContent = value;
         root.querySelector('.lmb-archetype-description').textContent = stats.desc ?? '';
+        const conditions = selection(root).conditions;
+        root.querySelector('.lmb-condition-reference').innerHTML = conditions.map(id => {
+            const condition = CONDITIONS.find(entry => entry.id === id);
+            return condition.custom ? `<details><summary>${condition.name} (reminder)</summary>${condition.rules}</details>`
+                : `<p>${condition.name}: uses native D&amp;D 5e rules.</p>`;
+        }).join('');
         root.querySelector('.lmb-selected-features').replaceChildren(...selectedFeatures.map((feature, index) => {
             const row = document.createElement('li');
             const name = document.createElement('span');
@@ -105,6 +137,7 @@ export async function showMonsterForm() {
     dialog.addEventListener('render', () => {
         const root = dialog.element;
         root.addEventListener('change', () => update(root));
+        root.querySelector('[name="hitPoints"]').addEventListener('input', () => update(root));
         root.querySelectorAll('[data-mode]').forEach(button => button.addEventListener('click', () => {
             mode = button.dataset.mode;
             root.querySelectorAll('[data-mode]').forEach(tab => tab.setAttribute('aria-selected', String(tab === button)));

@@ -21,6 +21,20 @@
             </label>
             <p class="lmb-archetype-description"></p>
         </section>
+        <label>Hit points
+            <input type="number" name="hitPoints" step="1" required>
+            <small class="lmb-hp-range"></small>
+        </label>
+        <label>Damage type
+            <select name="damageType"><option value="">GM chooses later</option>{{#each damageTypes}}<option value="{{id}}">{{name}}</option>{{/each}}</select>
+        </label>
+        <label>Attack conditions
+            <select name="conditions" multiple size="5">
+                <optgroup label="Native conditions">{{#each nativeConditions}}<option value="{{id}}">{{name}}</option>{{/each}}</optgroup>
+                <optgroup label="Custom reminders">{{#each customConditions}}<option value="{{id}}">{{name}} (reminder)</option>{{/each}}</optgroup>
+            </select>
+            <small>Choose zero or more. Apply from attack chat cards; the GM sets duration. Custom entries provide reminders.</small>
+        </label>
         <label>Feature
             <select name="feature">{{#each features}}<option value="{{@index}}">{{name}}</option>{{/each}}</select>
         </label>
@@ -40,5 +54,6 @@
         <p>Saving throws: <span data-stat="saves"></span></p>
         <h3>Features</h3>
         <ul class="lmb-selected-features"></ul>
+        <div class="lmb-condition-reference"></div>
     </section>
 </div>

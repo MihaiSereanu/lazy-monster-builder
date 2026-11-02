@@ -1,0 +1,308 @@
+{
+  "CR 0": {
+    "AC/DC": 10,
+    "HP": "3 (2-4)",
+    "Atk/Prof": "+2",
+    "Damage Per Round": "2",
+    "# Atks": "1",
+    "Dmg": "2 (1d4)",
+    "Example Monsters": "Commoner, rat, spider"
+  },
+  "CR 1/8": {
+    "AC/DC": 11,
+    "HP": "9 (7-11)",
+    "Atk/Prof": "+3",
+    "Damage Per Round": "3",
+    "# Atks": "1",
+    "Dmg": "4 (1d6 + 1)",
+    "Example Monsters": "Bandit, cultist, giant rat"
+  },
+  "CR 1/4": {
+    "AC/DC": 11,
+    "HP": "13 (10-16)",
+    "Atk/Prof": "+3",
+    "Damage Per Round": "5",
+    "# Atks": "1",
+    "Dmg": "5 (1d6 + 2)",
+    "Example Monsters": "Acolyte, skeleton, wolf"
+  },
+  "CR 1/2": {
+    "AC/DC": 12,
+    "HP": "22 (17-28)",
+    "Atk/Prof": "+4",
+    "Damage Per Round": "8",
+    "# Atks": "2",
+    "Dmg": "4 (1d4 + 2)",
+    "Example Monsters": "Black bear, scout, shadow"
+  },
+  "CR 1": {
+    "AC/DC": 12,
+    "HP": "33 (25-41)",
+    "Atk/Prof": "+5",
+    "Damage Per Round": "12",
+    "# Atks": "2",
+    "Dmg": "6 (1d8 + 2)",
+    "Example Monsters": "Dire wolf, specter, spy"
+  },
+  "CR 2": {
+    "AC/DC": 13,
+    "HP": "45 (34-56)",
+    "Atk/Prof": "+5",
+    "Damage Per Round": "17",
+    "# Atks": "2",
+    "Dmg": "9 (2d6 + 2)",
+    "Example Monsters": "Ghast, ogre, priest"
+  },
+  "CR 3": {
+    "AC/DC": 13,
+    "HP": "65 (49-81)",
+    "Atk/Prof": "+5",
+    "Damage Per Round": "23",
+    "# Atks": "2",
+    "Dmg": "12 (2d8 + 3)",
+    "Example Monsters": "Knight, mummy, werewolf"
+  },
+  "CR 4": {
+    "AC/DC": 14,
+    "HP": "84 (64-106)",
+    "Atk/Prof": "+6",
+    "Damage Per Round": "28",
+    "# Atks": "2",
+    "Dmg": "14 (3d8 + 1)",
+    "Example Monsters": "Ettin, ghost"
+  },
+  "CR 5": {
+    "AC/DC": 15,
+    "HP": "95 (71-119)",
+    "Atk/Prof": "+7",
+    "Damage Per Round": "35",
+    "# Atks": "3",
+    "Dmg": "12 (3d6 + 2)",
+    "Example Monsters": "Elemental, gladiator, vampire spawn"
+  },
+  "CR 6": {
+    "AC/DC": 15,
+    "HP": "112 (84-140)",
+    "Atk/Prof": "+7",
+    "Damage Per Round": "41",
+    "# Atks": "3",
+    "Dmg": "14 (3d6 + 4)",
+    "Example Monsters": "Mage, medusa, wyvern"
+  },
+  "CR 7": {
+    "AC/DC": 15,
+    "HP": "130 (98-162)",
+    "Atk/Prof": "+7",
+    "Damage Per Round": "47",
+    "# Atks": "3",
+    "Dmg": "16 (3d8 + 3)",
+    "Example Monsters": "Stone giant, young black dragon"
+  },
+  "CR 8": {
+    "AC/DC": 15,
+    "HP": "136 (102-170)",
+    "Atk/Prof": "+7",
+    "Damage Per Round": "53",
+    "# Atks": "3",
+    "Dmg": "18 (3d10 + 2)",
+    "Example Monsters": "Assassin, frost giant"
+  },
+  "CR 9": {
+    "AC/DC": 16,
+    "HP": "145 (109-181)",
+    "Atk/Prof": "+8",
+    "Damage Per Round": "59",
+    "# Atks": "3",
+    "Dmg": "22 (3d12 + 3)",
+    "Example Monsters": "Bone devil, fire giant, young blue dragon"
+  },
+  "CR 10": {
+    "AC/DC": 17,
+    "HP": "155 (116-194)",
+    "Atk/Prof": "+9",
+    "Damage Per Round": "65",
+    "# Atks": "4",
+    "Dmg": "16 (3d8 + 3)",
+    "Example Monsters": "Stone golem, young red dragon"
+  },
+  "CR 11": {
+    "AC/DC": 17,
+    "HP": "165 (124-206)",
+    "Atk/Prof": "+9",
+    "Damage Per Round": "71",
+    "# Atks": "4",
+    "Dmg": "18 (3d10 + 2)",
+    "Example Monsters": "Djinni, efreeti, horned devil"
+  },
+  "CR 12": {
+    "AC/DC": 17,
+    "HP": "175 (131-219)",
+    "Atk/Prof": "+9",
+    "Damage Per Round": "77",
+    "# Atks": "4",
+    "Dmg": "19 (3d10 + 3)",
+    "Example Monsters": "Archmage, erinyes"
+  },
+  "CR 13": {
+    "AC/DC": 18,
+    "HP": "184 (138-230)",
+    "Atk/Prof": "+10",
+    "Damage Per Round": "83",
+    "# Atks": "4",
+    "Dmg": "21 (4d8 + 3)",
+    "Example Monsters": "Adult white dragon, storm giant, vampire"
+  },
+  "CR 14": {
+    "AC/DC": 19,
+    "HP": "196 (147-245)",
+    "Atk/Prof": "+11",
+    "Damage Per Round": "89",
+    "# Atks": "4",
+    "Dmg": "22 (4d10)",
+    "Example Monsters": "Adult black dragon, ice devil"
+  },
+  "CR 15": {
+    "AC/DC": 19,
+    "HP": "210 (158-263)",
+    "Atk/Prof": "+11",
+    "Damage Per Round": "95",
+    "# Atks": "5",
+    "Dmg": "19 (3d10 + 3)",
+    "Example Monsters": "Adult green dragon, mummy lord, purple worm"
+  },
+  "CR 16": {
+    "AC/DC": 19,
+    "HP": "229 (172-286)",
+    "Atk/Prof": "+11",
+    "Damage Per Round": "101",
+    "# Atks": "5",
+    "Dmg": "21 (4d8 + 3)",
+    "Example Monsters": "Adult blue dragon, iron golem, marilith"
+  },
+  "CR 17": {
+    "AC/DC": 20,
+    "HP": "246 (185-308)",
+    "Atk/Prof": "+12",
+    "Damage Per Round": "107",
+    "# Atks": "5",
+    "Dmg": "22 (3d12 + 3)",
+    "Example Monsters": "Adult red dragon"
+  },
+  "CR 18": {
+    "AC/DC": 21,
+    "HP": "266 (200-333)",
+    "Atk/Prof": "+13",
+    "Damage Per Round": "113",
+    "# Atks": "5",
+    "Dmg": "23 (4d10 + 1)",
+    "Example Monsters": "Demilich"
+  },
+  "CR 19": {
+    "AC/DC": 21,
+    "HP": "285 (214-356)",
+    "Atk/Prof": "+13",
+    "Damage Per Round": "119",
+    "# Atks": "5",
+    "Dmg": "24 (4d10 + 2)",
+    "Example Monsters": "Balor"
+  },
+  "CR 20": {
+    "AC/DC": 21,
+    "HP": "300 (225-375)",
+    "Atk/Prof": "+13",
+    "Damage Per Round": "132",
+    "# Atks": "5",
+    "Dmg": "26 (4d12)",
+    "Example Monsters": "Ancient white dragon, pit fiend"
+  },
+  "CR 21": {
+    "AC/DC": 22,
+    "HP": "325 (244-406)",
+    "Atk/Prof": "+14",
+    "Damage Per Round": "150",
+    "# Atks": "5",
+    "Dmg": "30 (4d12 + 4)",
+    "Example Monsters": "Ancient black dragon, lich, solar"
+  },
+  "CR 22": {
+    "AC/DC": 23,
+    "HP": "350 (263-438)",
+    "Atk/Prof": "+15",
+    "Damage Per Round": "168",
+    "# Atks": "5",
+    "Dmg": "34 (4d12 + 8)",
+    "Example Monsters": "Ancient green dragon"
+  },
+  "CR 23": {
+    "AC/DC": 23,
+    "HP": "375 (281-469)",
+    "Atk/Prof": "+15",
+    "Damage Per Round": "186",
+    "# Atks": "5",
+    "Dmg": "37 (6d10 + 4)",
+    "Example Monsters": "Ancient blue dragon, kraken"
+  },
+  "CR 24": {
+    "AC/DC": 23,
+    "HP": "400 (300-500)",
+    "Atk/Prof": "+15",
+    "Damage Per Round": "204",
+    "# Atks": "5",
+    "Dmg": "41 (6d10 + 8)",
+    "Example Monsters": "Ancient red dragon"
+  },
+  "CR 25": {
+    "AC/DC": 24,
+    "HP": "430 (323-538)",
+    "Atk/Prof": "+16",
+    "Damage Per Round": "222",
+    "# Atks": "5",
+    "Dmg": "44 (6d10 + 11)",
+    "Example Monsters": "Demon princes, archdevils"
+  },
+  "CR 26": {
+    "AC/DC": 25,
+    "HP": "460 (345-575)",
+    "Atk/Prof": "+17",
+    "Damage Per Round": "240",
+    "# Atks": "5",
+    "Dmg": "48 (6d10 + 15)",
+    "Example Monsters": "Demon princes, archdevils"
+  },
+  "CR 27": {
+    "AC/DC": 25,
+    "HP": "490 (368-613)",
+    "Atk/Prof": "+17",
+    "Damage Per Round": "258",
+    "# Atks": "5",
+    "Dmg": "52 (6d10 + 19)",
+    "Example Monsters": "Demon princes, archdevils"
+  },
+  "CR 28": {
+    "AC/DC": 25,
+    "HP": "540 (405-675)",
+    "Atk/Prof": "+17",
+    "Damage Per Round": "276",
+    "# Atks": "5",
+    "Dmg": "55 (6d10 + 22)",
+    "Example Monsters": "Demon princes, archdevils"
+  },
+  "CR 29": {
+    "AC/DC": 26,
+    "HP": "600 (450-750)",
+    "Atk/Prof": "+18",
+    "Damage Per Round": "294",
+    "# Atks": "5",
+    "Dmg": "59 (6d10 + 26)",
+    "Example Monsters": "Demon princes, archdevils"
+  },
+  "CR 30": {
+    "AC/DC": 27,
+    "HP": "666 (500-833)",
+    "Atk/Prof": "+19",
+    "Damage Per Round": "312",
+    "# Atks": "5",
+    "Dmg": "62 (6d10 + 29)",
+    "Example Monsters": "Demigods, tarrasque"
+  }
+}

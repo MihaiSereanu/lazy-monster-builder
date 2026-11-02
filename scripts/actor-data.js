@@ -1,3 +1,5 @@
+import {conditionEffects} from './conditions.js';
+
 const MODULE_PATH = 'modules/lazy-monster-builder';
 const ACTIVITY_ID = 'lmbActivity00001';
 export const ABILITIES = ['str', 'dex', 'con', 'int', 'wis', 'cha'];
@@ -59,6 +61,9 @@ function buildFeature(feature, stats) {
         data.activation.condition = 'When a creature within 5 feet hits this creature with a melee attack.';
     } else if (feature.name === 'Misty Step') {
         data = {...activity('teleport', 'bonus'), teleport: {override: true, value: '30', units: 'ft'}};
+    } else if (feature.name === 'Restraining Grab') {
+        data = activity('utility', 'special');
+        data.activation.condition = 'After hitting the target with a melee attack.';
     } else if (legacy.actionType === 'save') {
         data = {
             ...activity('save', activation),
@@ -94,7 +99,7 @@ function buildFeature(feature, stats) {
             data.range = {units: 'self', override: true};
             data.target = {template: {type: 'sphere', size: '10', units: 'ft'},
                 affects: {type: 'creature'}, prompt: false, override: true};
-        } else if (['Damage Reflection', 'Knockdown'].includes(feature.name)) {
+        } else if (['Damage Reflection', 'Knockdown', 'Restraining Grab'].includes(feature.name)) {
             data.range = {value: '5', units: 'ft', override: true};
             data.target = {affects: {type: 'creature', count: '1'}, prompt: false, override: true};
         } else if (feature.name === 'Misty Step') {
@@ -125,16 +130,25 @@ function buildFeature(feature, stats) {
     return item;
 }
 
-export function buildMonsterData({stats, type, features = [], saves = []}) {
+export function selectedHP(stats, value) {
+    if (value === undefined || value === '') return Number(stats.HP);
+    const hp = Number(value);
+    const minimum = Number(stats.HPLow ?? stats.HP);
+    const maximum = Number(stats.HPHigh ?? stats.HP);
+    if (!Number.isInteger(hp) || hp < minimum || hp > maximum) throw new Error(`HP must be between ${minimum} and ${maximum}.`);
+    return hp;
+}
+
+export function buildMonsterData({stats, type, features = [], saves = [], hp, damageType = '', conditions = []}) {
     const name = `${stats.name ? `${stats.name} ` : ''}${type.name} - (CR ${stats.CR})`;
     const img = `${MODULE_PATH}/tokens/${type.name.toLowerCase()}.png`;
     const count = attackCount(stats, features);
-    return {
+    const actor = {
         name, type: 'npc', img,
         system: {
             attributes: {
                 ac: {flat: Number(stats.ACDC), calc: 'flat'},
-                hp: {value: Number(stats.HP), max: Number(stats.HP)},
+                hp: {value: selectedHP(stats, hp), max: selectedHP(stats, hp)},
                 movement: {walk: Number(stats.speed ?? 30), units: 'ft'}
             },
             abilities: stats.abilities ? structuredClone(stats.abilities) : Object.fromEntries(
@@ -161,4 +175,25 @@ export function buildMonsterData({stats, type, features = [], saves = []}) {
             }}
         }, ...features.map(feature => buildFeature(feature, stats))]
     };
+    for (const item of actor.items) {
+        for (const data of Object.values(item.system.activities ?? {})) {
+            for (const part of data.damage?.parts ?? []) part.types = damageType ? [damageType] : [];
+            if (data.type === 'attack') {
+                const effects = conditionEffects(conditions);
+                if (effects.length) {
+                    item.effects = [...(item.effects ?? []), ...effects];
+                    data.effects = effects.map(effect => ({_id: effect._id}));
+                }
+            } else if (item.name === 'Knockdown' || item.name === 'Restraining Grab') {
+                const effects = conditionEffects(item.name === 'Knockdown' ? ['prone'] : ['grappled', 'restrained']);
+                item.effects = effects;
+                data.effects = effects.map(effect => ({_id: effect._id, ...(data.type === 'save' ? {onSave: false} : {})}));
+            }
+        }
+        const energy = item.effects?.find(effect => effect.name === 'Energy Weapons (bonus damage)');
+        if (energy && damageType) {
+            for (const change of energy.system.changes) change.value = `${stats.DpACalc}[${damageType}]`;
+        }
+    }
+    return actor;
 }

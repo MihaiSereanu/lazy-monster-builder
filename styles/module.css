@@ -4,6 +4,9 @@
 .lmb-generator .lmb-controls { display: flex; flex-direction: column; gap: 16px; }
 .lmb-generator label { display: flex; flex-direction: column; gap: 6px; }
 .lmb-generator select { width: 100%; min-width: 0; }
+.lmb-generator select[multiple] { height: auto; min-height: 120px; }
+.lmb-generator small { line-height: 1.3; opacity: 0.8; }
+.lmb-generator .lmb-condition-reference details { margin: 8px 0; }
 .lmb-generator .lmb-tabs { display: flex; gap: 6px; }
 .lmb-generator .lmb-tabs button { flex: 1; }
 .lmb-generator .lmb-tabs [aria-selected="true"] { border-color: var(--color-warm-1); font-weight: bold; }

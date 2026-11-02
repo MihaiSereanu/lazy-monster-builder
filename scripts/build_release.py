@@ -6,7 +6,7 @@ from zipfile import ZIP_DEFLATED, ZipFile
 ROOT = Path(__file__).resolve().parents[1]
 DIST = ROOT / 'dist'
 FILES = ['module.json', 'README.md', 'LICENCE', 'ATTRIBUTION.md',
-         'scripts/module.js', 'scripts/actor-data.js', 'scripts/lib/monsters.js',
+         'scripts/module.js', 'scripts/actor-data.js', 'scripts/conditions.js', 'scripts/lib/monsters.js',
          'styles/module.css', 'templates/generator.hbs']
 FILES += [p.relative_to(ROOT).as_posix() for p in sorted((ROOT / 'tokens').glob('*')) if p.is_file()]
 

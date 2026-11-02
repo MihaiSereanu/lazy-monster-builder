@@ -24,10 +24,11 @@ const MONSTERS_STATS = [
     "PAB": "+3",
     "DpR": "3",
     "NoA": "1",
-    "DpA": "3",
-    "DpACalc": "1d4+1",
+    "DpA": "4",
+    "DpACalc": "1d6+1",
     "example_string": "Bandit, cultist, giant, rat",
-    "example_trunc": "Bandit, cultist, giant, rat"
+    "example_trunc": "Bandit, cultist, giant rat",
+    "example": "Bandit, cultist, giant rat"
   },
   {
     "CR": "1/4",
@@ -52,10 +53,10 @@ const MONSTERS_STATS = [
     "HPLow": "17",
     "HPHigh": "28",
     "PAB": "+4",
-    "DpR": "10",
-    "NoA": "1",
-    "DpA": "10",
-    "DpACalc": "2d6+3",
+    "DpR": "8",
+    "NoA": "2",
+    "DpA": "4",
+    "DpACalc": "1d4+2",
     "example_string": "Black bear, scout, shadow",
     "example_trunc": "Black bear, scout, shadow"
   },
@@ -108,14 +109,14 @@ const MONSTERS_STATS = [
     "CR": "4",
     "ECL": "9",
     "ACDC": "14",
-    "HP": "85",
+    "HP": "84",
     "HPLow": "64",
     "HPHigh": "106",
     "PAB": "+6",
-    "DpR": "29",
+    "DpR": "28",
     "NoA": "2",
-    "DpA": "15",
-    "DpACalc": "3d8+2",
+    "DpA": "14",
+    "DpACalc": "3d8+1",
     "example_string": "Ettin, ghost",
     "example_trunc": "Ettin, ghost"
   },
@@ -153,9 +154,9 @@ const MONSTERS_STATS = [
     "CR": "7",
     "ECL": "12",
     "ACDC": "15",
-    "HP": "127",
-    "HPLow": "95",
-    "HPHigh": "159",
+    "HP": "130",
+    "HPLow": "98",
+    "HPHigh": "162",
     "PAB": "+7",
     "DpR": "47",
     "NoA": "3",
@@ -176,7 +177,6 @@ const MONSTERS_STATS = [
     "NoA": "3",
     "DpA": "18",
     "DpACalc": "3d10+2",
-
     "example_string": "Assassin, frost giant",
     "example_trunc": "Assassin, frost giant"
   },
@@ -295,8 +295,8 @@ const MONSTERS_STATS = [
     "PAB": "+11",
     "DpR": "101",
     "NoA": "5",
-    "DpA": "22",
-    "DpACalc": "3d12+3",
+    "DpA": "21",
+    "DpACalc": "4d8+3",
     "example_string": "Adult blue dragon, iron golem, marilith",
     "example_trunc": "Adult blue dragon,..."
   },
@@ -310,8 +310,8 @@ const MONSTERS_STATS = [
     "PAB": "+12",
     "DpR": "107",
     "NoA": "5",
-    "DpA": "21",
-    "DpACalc": "4d8+3",
+    "DpA": "22",
+    "DpACalc": "3d12+3",
     "example_string": "Adult red dragon",
     "example_trunc": "Adult red dragon"
   },
@@ -433,7 +433,8 @@ const MONSTERS_STATS = [
     "DpA": "44",
     "DpACalc": "6d10+11",
     "example_string": "",
-    "example_trunc": ""
+    "example_trunc": "Demon princes, archdevils",
+    "example": "Demon princes, archdevils"
   },
   {
     "CR": "26",
@@ -448,7 +449,8 @@ const MONSTERS_STATS = [
     "DpA": "48",
     "DpACalc": "6d10+15",
     "example_string": "",
-    "example_trunc": ""
+    "example_trunc": "Demon princes, archdevils",
+    "example": "Demon princes, archdevils"
   },
   {
     "CR": "27",
@@ -463,7 +465,8 @@ const MONSTERS_STATS = [
     "DpA": "52",
     "DpACalc": "6d10+19",
     "example_string": "",
-    "example_trunc": ""
+    "example_trunc": "Demon princes, archdevils",
+    "example": "Demon princes, archdevils"
   },
   {
     "CR": "28",
@@ -478,7 +481,8 @@ const MONSTERS_STATS = [
     "DpA": "55",
     "DpACalc": "6d10+22",
     "example_string": "",
-    "example_trunc": ""
+    "example_trunc": "Demon princes, archdevils",
+    "example": "Demon princes, archdevils"
   },
   {
     "CR": "29",
@@ -493,7 +497,8 @@ const MONSTERS_STATS = [
     "DpA": "59",
     "DpACalc": "6d10+26",
     "example_string": "",
-    "example_trunc": ""
+    "example_trunc": "Demon princes, archdevils",
+    "example": "Demon princes, archdevils"
   },
   {
     "CR": "30",
@@ -508,7 +513,8 @@ const MONSTERS_STATS = [
     "DpA": "62",
     "DpACalc": "6d10+29",
     "example_string": "Tarrasque",
-    "example_trunc": "Tarrasque"
+    "example_trunc": "Demigods, tarrasque",
+    "example": "Demigods, tarrasque"
   }
 ]
 

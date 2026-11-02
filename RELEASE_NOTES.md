@@ -1,18 +1,22 @@
-# Lazy Monster Builder 1.0.1
+# Lazy Monster Builder 1.1.0
 
-Fixes generated feature damage and activity settings in Foundry v14/D&D 5e 6.0.6.
+Adds optional condition and damage choices to the generator and aligns its CR
+statistics with the supplied Forge of Foes resource.
 
-- Aura, Damage Reflection, and Burst use native fixed damage. CR 30 values are 31, 31, and 156 respectively.
-- Aura describes creatures in a 10-foot radius instead of targeting its owner.
-- Damage Reflection has a damage activity; Misty Step has a 30-foot bonus-action teleport.
-- Knockdown targets one creature within melee reach.
-- Energy Weapons adds damage to weapon attacks, preserving magical properties.
-- Each attack-reducing feature removes one attack. Aura plus Reflection leaves a CR 30 monster with three attacks.
+- Adds 12 native D&D 5e attack condition effects and six labelled custom reminders.
+- Connects Knockdown to Prone, and Restraining Grab to Grappled and Restrained.
+- Adds damage-type selection and hit points within the CR table's low/high range.
+- Corrects CR 1/8, 1/2, 4, 7, 16, and 17 statistics and fills missing monster examples.
+- Preserves native condition immunity and supports reapplication after removal.
 
-Validated 492 native profile/feature combinations and 410 damage configurations,
-plus persisted activity rolls, native chat cards, sheet labels, and browser reload.
-Nine Node test cases passed.
+The one-line summary and copy button are omitted as requested.
 
-Existing NPCs retain their stored data. Recreate them or edit their activities to
-apply the new values. Aura/Reflection triggers remain manually invoked; damage
-types remain the GM's choice.
+Validated 492 profile/feature combinations, 410 damage configurations, all 12
+native conditions with immunity/removal checks, all six nonmechanical reminders,
+and native chat-card application. Chosen HP, damage type, and attack conditions
+were tested through the dialog and browser reload. Thirteen Node test cases pass.
+
+Custom condition timers/levels/consequences remain manual. Existing NPCs retain
+their saved data; recreate them or edit their activities to use these changes.
+See README.md for native condition removal behavior and ATTRIBUTION.md for
+source notices.

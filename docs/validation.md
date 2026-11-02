@@ -38,3 +38,32 @@ To run the native suite, load `tests/foundry-features.mjs` in an isolated browse
 session with the module enabled and call `checkFoundryFeatures()`. It creates a
 disposable actor and native chat messages, and returns their IDs for inspection.
 This suite must not be run in a campaign world.
+
+## Version 1.1.0 conditions and resource controls
+
+Thirteen Node test cases pass. The source-table fixture was captured from the
+user-supplied `mshea/lazy_gm_tools/fof_stats.html` on 2026-11-02; all 34 CR rows
+match its AC/DC, HP/range, attack/proficiency, attack count, DPR, damage amount,
+and dice expression. Preset stat blocks were not replaced.
+
+The expanded native feature suite again passed 492 combinations and 410 damage
+configurations. `tests/foundry-conditions.mjs` verified all 12 native conditions
+through the D&D 5e chat effect application path, condition immunity, movement
+changes for Grappled/Restrained, and native condition removal. All six custom
+reminders were checked for no status, movement, or Active Effect change automation.
+The source monster acquired none of its target conditions. Global native status
+configuration remained unchanged.
+
+The native chat tray reuses an existing application effect when reapplied. Rider
+conditions are only collected on creation, so removing a condition alone initially
+prevented reapplication. A module-scoped deletion hook now clears matching
+application reminders when the actual native condition is removed. The exact
+remove-and-reapply sequence passed after that change.
+
+The browser created a CR 30 Undead with 700 HP, Necrotic damage, Prone, and a
+Fatigue reminder. HP/type/conditions persisted after reload. Knockdown and
+Restraining Grab offered and applied their native effects from chat cards.
+Typed Energy Weapons retained both damage parts and Necrotic typing.
+Desktop and 540px viewport screenshots were inspected; the dialog fitted without
+horizontal overflow and the footer remained reachable. The removed summary and
+copy controls were absent. No browser exceptions were reported.

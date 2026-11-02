@@ -6,7 +6,7 @@ export async function checkFoundryFeatures() {
     const profiles = [...MONSTERS_STATS, ...MONSTERS_ARCHETYPES];
     const expected = {'Cunning Action': 'utility', 'Damaging Blast': 'attack', 'Damage Reflection': 'damage',
         'Damaging Aura': 'damage', 'Damaging Burst': 'save', 'Energy Weapons (extra attack)': 'attack',
-        'Knockdown': 'save', 'Misty Step': 'teleport'};
+        'Knockdown': 'save', 'Misty Step': 'teleport', 'Restraining Grab': 'utility'};
     const halfDamage = new Set(['Damaging Aura', 'Damage Reflection', 'Damaging Burst']);
     const report = {core: game.version, system: game.system.version, combinations: 0, damageRolls: 0, persisted: []};
     const assert = (ok, message) => {if (!ok) throw new Error(message);};

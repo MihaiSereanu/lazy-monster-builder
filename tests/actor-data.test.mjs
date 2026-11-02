@@ -108,7 +108,7 @@ test('affected creatures, trigger timing, and teleport distance match each featu
 test('each feature can be generated independently for every CR and preset', () => {
     const expected = {'Cunning Action': 'utility', 'Damaging Blast': 'attack', 'Damage Reflection': 'damage',
         'Damaging Aura': 'damage', 'Damaging Burst': 'save', 'Energy Weapons (extra attack)': 'attack',
-        'Knockdown': 'save', 'Misty Step': 'teleport'};
+        'Knockdown': 'save', 'Misty Step': 'teleport', 'Restraining Grab': 'utility'};
     for (const stats of [...MONSTERS_STATS, ...MONSTERS_ARCHETYPES]) {
         for (const entry of features) {
             const actor = buildMonsterData({stats, type, features: [entry]});
