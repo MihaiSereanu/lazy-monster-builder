@@ -1,0 +1,44 @@
+<div class="lmb-layout">
+    <div class="lmb-controls">
+        <label>Monster type
+            <select name="monsterType">{{#each types}}<option value="{{@index}}">{{name}}</option>{{/each}}</select>
+        </label>
+        <nav class="lmb-tabs" role="tablist" aria-label="Monster source">
+            <button type="button" role="tab" data-mode="cr" aria-selected="true" aria-controls="lmb-cr">By CR</button>
+            <button type="button" role="tab" data-mode="archetype" aria-selected="false" aria-controls="lmb-archetype">By stat block</button>
+        </nav>
+        <section id="lmb-cr" data-panel="cr">
+            <label>Challenge rating
+                <select name="challenge">{{#each stats}}<option value="{{@index}}">CR {{CR}} ({{example_trunc}})</option>{{/each}}</select>
+            </label>
+            <fieldset><legend>Proficient saving throws</legend>
+                <div class="lmb-saves">{{#each abilities}}<label><input type="checkbox" name="save-{{this}}">{{this}}</label>{{/each}}</div>
+            </fieldset>
+        </section>
+        <section id="lmb-archetype" data-panel="archetype" hidden>
+            <label>Stat block
+                <select name="archetype">{{#each archetypes}}<option value="{{@index}}">CR {{CR}} — {{name}}</option>{{/each}}</select>
+            </label>
+            <p class="lmb-archetype-description"></p>
+        </section>
+        <label>Feature
+            <select name="feature">{{#each features}}<option value="{{@index}}">{{name}}</option>{{/each}}</select>
+        </label>
+        <button type="button" class="lmb-add-feature"><i class="fa-solid fa-plus" inert></i> Add Feature</button>
+    </div>
+    <section class="lmb-preview" aria-label="Monster preview" aria-live="polite">
+        <img class="lmb-token" alt="Monster token" src="modules/lazy-monster-builder/tokens/aberration.png">
+        <dl class="lmb-stats">
+            <div><dt>HP</dt><dd data-stat="hp"></dd></div>
+            <div><dt>AC</dt><dd data-stat="ac"></dd></div>
+            <div><dt>Proficiency</dt><dd data-stat="proficiency"></dd></div>
+            <div><dt>Attack bonus</dt><dd data-stat="attack"></dd></div>
+            <div><dt>Damage × attacks</dt><dd data-stat="damage"></dd></div>
+            <div><dt>Level equivalent</dt><dd data-stat="level"></dd></div>
+        </dl>
+        <dl class="lmb-abilities">{{#each abilities}}<div><dt>{{this}}</dt><dd data-stat="{{this}}"></dd></div>{{/each}}</dl>
+        <p>Saving throws: <span data-stat="saves"></span></p>
+        <h3>Features</h3>
+        <ul class="lmb-selected-features"></ul>
+    </section>
+</div>

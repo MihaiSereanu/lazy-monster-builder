@@ -1,0 +1,10 @@
+{
+  "name": "lazy-monster-builder",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test tests/*.test.mjs",
+    "build": "python scripts/build_release.py"
+  }
+}
