@@ -9,10 +9,19 @@ export function parseCR(value) {
 }
 
 export function attackCount(stats, features) {
-    return Math.max(0, Number(stats.NoA) - (features.some(f => f.reduceAtk) ? 1 : 0));
+    return Math.max(0, Number(stats.NoA) - features.filter(f => f.reduceAtk).length);
 }
 
-function damagePart(formula) {
+export function fixedFeatureDamage(stats, perRound = false) {
+    const dice = String(stats.DpACalc).match(/^(\d+)d(\d+)([+-]\d+)?$/);
+    if (!dice) throw new Error('Unsupported damage formula in monster resource table.');
+    const average = Number(dice[1]) * (Number(dice[2]) + 1) / 2 + Number(dice[3] ?? 0);
+    const perAttack = Number(stats.DpA ?? average);
+    return Math.floor((perRound ? Number(stats.DpR ?? average * Number(stats.NoA)) : perAttack) / 2);
+}
+
+function damagePart(formula, fixed = false) {
+    if (fixed) return {bonus: String(formula), custom: {enabled: false, formula: ''}, types: []};
     return {custom: {enabled: true, formula: String(formula)}, types: []};
 }
 
@@ -42,11 +51,15 @@ function buildFeature(feature, stats) {
     const legacy = item.system;
     const activation = legacy.activation?.type ?? '';
     let data;
-    let formula = stats.DpACalc;
-    if (feature.useDpR) formula = Array(Number(stats.NoA)).fill(formula).join('+');
-    if (feature.divideDmg) formula = `floor((${formula})/${feature.divideDmg})`;
+    const fixed = ['Damaging Aura', 'Damage Reflection', 'Damaging Burst'].includes(feature.name);
+    const formula = fixed ? fixedFeatureDamage(stats, feature.name === 'Damaging Burst') : stats.DpACalc;
 
-    if (legacy.actionType === 'save') {
+    if (feature.name === 'Damage Reflection') {
+        data = {...activity('damage', 'special'), damage: {parts: [damagePart(formula, true)]}};
+        data.activation.condition = 'When a creature within 5 feet hits this creature with a melee attack.';
+    } else if (feature.name === 'Misty Step') {
+        data = {...activity('teleport', 'bonus'), teleport: {override: true, value: '30', units: 'ft'}};
+    } else if (legacy.actionType === 'save') {
         data = {
             ...activity('save', activation),
             save: {
@@ -56,12 +69,12 @@ function buildFeature(feature, stats) {
                     : {calculation: legacy.save.scaling, formula: ''}
             },
             damage: {onSave: feature.isDmg ? 'half' : 'none',
-                parts: feature.isDmg ? [damagePart(formula)] : []}
+                parts: feature.isDmg ? [damagePart(formula, fixed)] : []}
         };
     } else if (feature.isDmg && legacy.actionType?.endsWith('ak')) {
         data = attackActivity({...stats, DpACalc: formula}, legacy.actionType);
     } else if (feature.isDmg && !feature.isEffect) {
-        data = {...activity('damage', activation), damage: {parts: [damagePart(formula)]}};
+        data = {...activity('damage', activation), damage: {parts: [damagePart(formula, fixed)]}};
     } else if (activation) {
         data = activity('utility', activation);
     }
@@ -76,6 +89,18 @@ function buildFeature(feature, stats) {
             data.target = {affects: {type: legacy.target.type, count: legacy.target.value ? String(legacy.target.value) : ''},
                 override: true};
         }
+        if (feature.name === 'Damaging Aura') {
+            data.activation = {type: 'special', condition: "When another creature starts its turn within 10 feet."};
+            data.range = {units: 'self', override: true};
+            data.target = {template: {type: 'sphere', size: '10', units: 'ft'},
+                affects: {type: 'creature'}, prompt: false, override: true};
+        } else if (['Damage Reflection', 'Knockdown'].includes(feature.name)) {
+            data.range = {value: '5', units: 'ft', override: true};
+            data.target = {affects: {type: 'creature', count: '1'}, prompt: false, override: true};
+        } else if (feature.name === 'Misty Step') {
+            data.range = {units: 'self', override: true};
+            data.target = {affects: {type: 'self'}, prompt: false, override: true};
+        }
     }
 
     item.system = {
@@ -83,6 +108,7 @@ function buildFeature(feature, stats) {
         type: legacy.type ?? {value: item.type === 'weapon' ? 'natural' : 'monster'},
         activities: data ? {[ACTIVITY_ID]: data} : {}
     };
+    if (legacy.properties) item.system.properties = structuredClone(legacy.properties);
     if (item.type === 'weapon') {
         item.system.equipped = true;
         item.system.proficient = 0;
@@ -90,7 +116,7 @@ function buildFeature(feature, stats) {
     if (feature.isEffect) {
         item.effects = [{
             name: item.name, img: item.img, type: 'base', transfer: true,
-            system: {changes: ['mwak', 'rwak', 'msak', 'rsak'].map(key => ({
+            system: {changes: ['mwak', 'rwak'].map(key => ({
                 key: `system.rolls.damage.${key}.bonus`, type: 'add',
                 value: String(stats.DpACalc), phase: 'initial'
             }))}

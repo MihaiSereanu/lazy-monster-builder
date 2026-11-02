@@ -29,7 +29,16 @@ The generated NPC includes its token image, hit points, flat AC, table proficien
 attack activity, attack count, and selected features. Attacks use the table's exact
 attack bonus and damage formula. Damage types remain unspecified where the
 resource leaves them to the GM; edit the resulting activity to choose a type.
+Aura, Damage Reflection, and Damaging Burst use fixed damage calculated from the
+resource table. At CR 30, Aura and Reflection deal 31 damage; Burst deals 156
+before a successful save. Presets without damage columns use their dice averages.
+Each attack-reducing feature removes one attack, down to a minimum of zero.
+
+Misty Step uses a native 30-foot bonus-action teleport. Aura and Reflection have
+manually invoked damage activities; their turn and hit triggers are not automated.
 Descriptive features require the GM to adjudicate their stated conditions.
+Updating the module does not rewrite NPCs already created. Recreate an NPC to
+use the new generated data, or edit its existing activities in Foundry.
 
 ## Development
 
