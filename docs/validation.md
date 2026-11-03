@@ -67,3 +67,38 @@ Typed Energy Weapons retained both damage parts and Necrotic typing.
 Desktop and 540px viewport screenshots were inspected; the dialog fitted without
 horizontal overflow and the footer remained reachable. The removed summary and
 copy controls were absent. No browser exceptions were reported.
+
+## Working tree: combat type defaults and concise conditions
+
+Validated on 2026-11-03 using the disposable local world with Foundry 14.369 and
+D&D 5e 6.0.6. All 21 Node tests pass. The new tests cover the approved save pairs
+and free type features across all 14 types and all 41 CR/preset profiles, GM save
+overrides (including zero saves), source-data immutability, native protections,
+Giant melee reach, and fixed Acid typing for Corrosive Form. Every optional
+feature retains its original attack cost: only Aura and Reflection cost one each.
+
+`tests/foundry-types.mjs` passed 574 strict native actor validations with all
+optional features and no preparation warnings. Each type was also persisted
+temporarily. Fear Aura created a native Wisdom-save chat card and applied
+Frightened to its target; Construct/Elemental Poisoned immunity and Plant Prone
+immunity were exercised through native chat effect application. CR 30 Corrosive
+Form rolled 19 Acid damage, matching the resource table's proficiency value even
+when generated attacks used Fire. Parry and Fortitude produced their feature cards.
+
+Browser checks verified initial saves, editable saves in both modes, preservation
+of GM choices across CR/preset changes, reset on type changes, and cumulative
+attack costs. A Brute Giant created through the dialog retained zero proficient
+saves, 10-foot reach, its free feature, and the preview's zero attacks after two
+costed features and a browser reload. Desktop and 540px screenshots were inspected;
+there was no horizontal dialog overflow and the footer remained reachable.
+
+The final browser run reported no page exceptions. The first test run exposed a
+core chat-notification race when the test deleted cards during their popup
+animation; the harness now deletes those cards after reload. Narrow viewports
+still produce Foundry's own minimum-resolution notice.
+
+Conditional advantage, Parry adjudication, Fortitude's variable DC/HP change,
+and Fear Aura's turn trigger, condition ending, and successful-save immunity are
+GM-managed as described on the generated features. These checks do not prove
+campaign-world or physical-device behavior. Existing campaign actors were not
+modified.

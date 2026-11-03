@@ -30,3 +30,18 @@ This work includes material taken from the System Reference Document 5.1
 ("SRD 5.1") by Wizards of the Coast LLC and available at
 [the SRD resource page](https://dnd.wizards.com/resources/systems-reference-document).
 The SRD 5.1 is licensed under the [Creative Commons Attribution 4.0 International License](https://creativecommons.org/licenses/by/4.0/legalcode).
+
+The combat type defaults adapt rules from the D&D 5e 6.0.6 Modern Content
+Monster Features and Character Origins compendiums. Their summaries are
+rewritten for this module. No compendium artwork is included.
+
+This work includes material from the System Reference Document 5.2 ("SRD 5.2")
+by Wizards of the Coast LLC, available at [D&D Beyond](https://www.dndbeyond.com/srd).
+The SRD 5.2 is licensed under the
+[Creative Commons Attribution 4.0 International License](https://creativecommons.org/licenses/by/4.0/legalcode).
+
+Type-wide assignments, Psychic Resistance, Extended Reach, and Rooted
+Resilience are house defaults. Construct and Elemental protections use native
+traits from representative monsters. Corrosive Form uses proficiency-based
+Acid damage and omits equipment destruction. Fear Aura uses the builder's
+save DC. These changes do not claim to reproduce the source monsters' balance.

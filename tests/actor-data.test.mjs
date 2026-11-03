@@ -19,7 +19,7 @@ test('all CR and archetype rows retain numeric stats and fixed attack/damage for
         assert.equal(activity(actor.items[0]).attack.flat, true);
         assert.match(activity(actor.items[0])._id, /^[A-Za-z0-9]{16}$/);
         assert.equal(activity(actor.items[0]).damage.parts[0].custom.formula, stats.DpACalc);
-        assert.equal(actor.system.abilities.dex.proficient, stats.abilities?.dex.proficient ?? 1);
+        assert.equal(actor.system.abilities.dex.proficient, 1);
     }
 });
 

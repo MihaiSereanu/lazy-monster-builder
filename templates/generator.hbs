@@ -11,9 +11,6 @@
             <label>Challenge rating
                 <select name="challenge">{{#each stats}}<option value="{{@index}}">CR {{CR}} ({{example_trunc}})</option>{{/each}}</select>
             </label>
-            <fieldset><legend>Proficient saving throws</legend>
-                <div class="lmb-saves">{{#each abilities}}<label><input type="checkbox" name="save-{{this}}">{{this}}</label>{{/each}}</div>
-            </fieldset>
         </section>
         <section id="lmb-archetype" data-panel="archetype" hidden>
             <label>Stat block
@@ -21,6 +18,10 @@
             </label>
             <p class="lmb-archetype-description"></p>
         </section>
+        <fieldset><legend>Proficient saving throws</legend>
+            <div class="lmb-saves">{{#each abilities}}<label><input type="checkbox" name="save-{{this}}">{{this}}</label>{{/each}}</div>
+            <small>Each type starts with two. Add or remove saves as needed; changing type resets its defaults.</small>
+        </fieldset>
         <label>Hit points
             <input type="number" name="hitPoints" step="1" required>
             <small class="lmb-hp-range"></small>
@@ -31,12 +32,12 @@
         <label>Attack conditions
             <select name="conditions" multiple size="5">
                 <optgroup label="Native conditions">{{#each nativeConditions}}<option value="{{id}}">{{name}}</option>{{/each}}</optgroup>
-                <optgroup label="Custom reminders">{{#each customConditions}}<option value="{{id}}">{{name}} (reminder)</option>{{/each}}</optgroup>
+                <optgroup label="Custom conditions">{{#each customConditions}}<option value="{{id}}">{{name}}</option>{{/each}}</optgroup>
             </select>
-            <small>Choose zero or more. Apply from attack chat cards; the GM sets duration. Custom entries provide reminders.</small>
+            <small>Apply from attack chat cards; the GM sets duration and applies custom condition rules manually.</small>
         </label>
         <label>Feature
-            <select name="feature">{{#each features}}<option value="{{@index}}">{{name}}</option>{{/each}}</select>
+            <select name="feature">{{#each features}}<option value="{{@index}}">{{name}}{{#if reduceAtk}} (−1 attack){{/if}}</option>{{/each}}</select>
         </label>
         <button type="button" class="lmb-add-feature"><i class="fa-solid fa-plus" inert></i> Add Feature</button>
     </div>
@@ -52,8 +53,12 @@
         </dl>
         <dl class="lmb-abilities">{{#each abilities}}<div><dt>{{this}}</dt><dd data-stat="{{this}}"></dd></div>{{/each}}</dl>
         <p>Saving throws: <span data-stat="saves"></span></p>
-        <h3>Features</h3>
+        <h3>Type feature</h3>
+        <strong class="lmb-type-feature-name"></strong>
+        <p class="lmb-type-feature-rules"></p>
+        <h3>Optional features</h3>
         <ul class="lmb-selected-features"></ul>
+        <h3 class="lmb-condition-heading" hidden>Attack conditions</h3>
         <div class="lmb-condition-reference"></div>
     </section>
 </div>

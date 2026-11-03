@@ -34,6 +34,30 @@ Aura, Damage Reflection, and Damaging Burst use fixed damage calculated from the
 resource table. At CR 30, Aura and Reflection deal 31 damage; Burst deals 156
 before a successful save. Presets without damage columns use their dice averages.
 Each attack-reducing feature removes one attack, down to a minimum of zero.
+Only Damaging Aura and Damage Reflection have this cost; the selector and preview
+show it beside their names.
+
+Each monster type adds a free combat feature and starts with two saving throw
+proficiencies. Add or remove saves in either CR or preset mode. Changing type
+loads its two defaults; changing CR or preset keeps your choices. Preset ability
+scores are preserved. The type feature appears separately from optional features
+and does not spend attacks or change the selected CR.
+
+The type packages are house defaults adapted from D&D Modern Content, not
+universal creature-type rules. Aberrations resist Psychic damage; Constructs
+are immune to Poison and Psychic damage and Poisoned; Elementals are immune
+to Poison damage and Poisoned; Plants are immune to Prone. Giants have 10-foot
+melee reach. These use native actor and weapon fields.
+
+Beasts receive Pack Tactics; Celestials and Fiends receive Magic Resistance;
+Fey receive Fey Ancestry; Monstrosities receive Bloodied Fury. The GM selects
+Advantage when their conditions apply. Dragon Fear Aura offers a Wisdom save
+and Frightened from its chat card; the GM invokes its turn trigger and manages
+condition endings and 24-hour immunity after a successful save. Humanoid Parry
+provides a reaction card for its conditional +2 AC. Ooze Corrosive Form provides
+a damage activity for Acid damage equal to proficiency, regardless of the chosen
+attack damage type. Undead Fortitude provides its rule on a feature card; roll
+a native Constitution save against 5 + damage taken and set HP to 1 on success.
 
 Misty Step uses a native 30-foot bonus-action teleport. Aura and Reflection have
 manually invoked damage activities; their turn and hit triggers are not automated.
@@ -54,8 +78,8 @@ condition also removes this module's matching application reminder, allowing it
 to be applied again. Removing only an application reminder leaves the native
 condition active; remove the condition through Foundry's condition controls.
 
-Confused, Doomed, Rattled, Slowed, Fatigue, and Strife are custom reminders with
-reference text from the supplied Forge of Foes page. They do not change rolls,
+Confused, Doomed, Rattled, Slowed, Fatigue, and Strife are custom conditions with
+concise reference text from the supplied Forge of Foes page. They do not change rolls,
 movement, timers, or tracked levels. The GM manages those rules. Their
 reference text is available in the generator and on the applied effect.
 

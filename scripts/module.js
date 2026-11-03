@@ -1,6 +1,7 @@
 import {MONSTERS_FEATURES, MONSTERS_STATS, MONSTERS_TYPE, MONSTERS_ARCHETYPES} from './lib/monsters.js';
 import {ABILITIES, attackCount, buildMonsterData} from './actor-data.js';
 import {CONDITIONS, clearConditionApplications} from './conditions.js';
+import {typeProfile, typeFeatureRules} from './type-features.js';
 
 const MODULE_ID = 'lazy-monster-builder';
 const FEATURES = MONSTERS_FEATURES.filter(Boolean);
@@ -44,6 +45,7 @@ export async function showMonsterForm() {
     let mode = 'cr';
     const selectedFeatures = [];
     let previousStats;
+    let previousType;
     const dialog = new foundry.applications.api.DialogV2({
         id: 'lmb-generator', classes: ['lmb-generator'],
         window: {title: 'Create a monster', resizable: true},
@@ -98,6 +100,13 @@ export async function showMonsterForm() {
             previousStats = stats;
         }
         const type = MONSTERS_TYPE[Number(root.querySelector('[name="monsterType"]').value)];
+        const profile = typeProfile(type);
+        if (previousType !== type) {
+            for (const key of ABILITIES) root.querySelector(`[name="save-${key}"]`).checked = profile.saves.includes(key);
+            previousType = type;
+        }
+        root.querySelector('.lmb-type-feature-name').textContent = profile.name;
+        root.querySelector('.lmb-type-feature-rules').textContent = typeFeatureRules(type, stats);
         root.querySelector('.lmb-token').src = `modules/${MODULE_ID}/tokens/${type.name.toLowerCase()}.png`;
         const values = {
             hp: hp.value, ac: stats.ACDC, proficiency: stats.PAB,
@@ -105,8 +114,7 @@ export async function showMonsterForm() {
             attack: stats.atkBonus ?? stats.PAB, level: stats.ECL ?? '—'
         };
         for (const key of ABILITIES) values[key] = stats.abilities?.[key].value ?? 10;
-        const saves = ABILITIES.filter(key => stats.abilities
-            ? stats.abilities[key].proficient : root.querySelector(`[name="save-${key}"]`).checked);
+        const saves = ABILITIES.filter(key => root.querySelector(`[name="save-${key}"]`).checked);
         values.saves = saves.map(key => {
             const modifier = Math.floor(((stats.abilities?.[key].value ?? 10) - 10) / 2) + Number(stats.PAB);
             return `${key.toUpperCase()} ${modifier >= 0 ? '+' : ''}${modifier}`;
@@ -114,15 +122,16 @@ export async function showMonsterForm() {
         for (const [key, value] of Object.entries(values)) root.querySelector(`[data-stat="${key}"]`).textContent = value;
         root.querySelector('.lmb-archetype-description').textContent = stats.desc ?? '';
         const conditions = selection(root).conditions;
+        root.querySelector('.lmb-condition-heading').hidden = conditions.length === 0;
         root.querySelector('.lmb-condition-reference').innerHTML = conditions.map(id => {
             const condition = CONDITIONS.find(entry => entry.id === id);
-            return condition.custom ? `<details><summary>${condition.name} (reminder)</summary>${condition.rules}</details>`
+            return condition.custom ? `<details><summary>${condition.name}</summary>${condition.rules}</details>`
                 : `<p>${condition.name}: uses native D&amp;D 5e rules.</p>`;
         }).join('');
         root.querySelector('.lmb-selected-features').replaceChildren(...selectedFeatures.map((feature, index) => {
             const row = document.createElement('li');
             const name = document.createElement('span');
-            name.textContent = feature.name;
+            name.textContent = feature.name + (feature.reduceAtk ? ' (−1 attack)' : '');
             name.title = feature.desc;
             const remove = document.createElement('button');
             remove.type = 'button';

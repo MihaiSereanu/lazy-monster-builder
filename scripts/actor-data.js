@@ -1,4 +1,5 @@
 import {conditionEffects} from './conditions.js';
+import {applyTypeFeature, typeProfile} from './type-features.js';
 
 const MODULE_PATH = 'modules/lazy-monster-builder';
 const ACTIVITY_ID = 'lmbActivity00001';
@@ -139,7 +140,7 @@ export function selectedHP(stats, value) {
     return hp;
 }
 
-export function buildMonsterData({stats, type, features = [], saves = [], hp, damageType = '', conditions = []}) {
+export function buildMonsterData({stats, type, features = [], saves = typeProfile(type).saves, hp, damageType = '', conditions = []}) {
     const name = `${stats.name ? `${stats.name} ` : ''}${type.name} - (CR ${stats.CR})`;
     const img = `${MODULE_PATH}/tokens/${type.name.toLowerCase()}.png`;
     const count = attackCount(stats, features);
@@ -151,9 +152,10 @@ export function buildMonsterData({stats, type, features = [], saves = [], hp, da
                 hp: {value: selectedHP(stats, hp), max: selectedHP(stats, hp)},
                 movement: {walk: Number(stats.speed ?? 30), units: 'ft'}
             },
-            abilities: stats.abilities ? structuredClone(stats.abilities) : Object.fromEntries(
-                ABILITIES.map(key => [key, {value: 10, proficient: saves.includes(key) ? 1 : 0}])
-            ),
+            abilities: Object.fromEntries(ABILITIES.map(key => [key, {
+                ...structuredClone(stats.abilities?.[key] ?? {value: 10}),
+                proficient: saves.includes(key) ? 1 : 0
+            }])),
             skills: structuredClone(stats.skills ?? {}),
             details: {type: {value: type.name.toLowerCase()}, cr: parseCR(stats.CR)}
         },
@@ -195,5 +197,7 @@ export function buildMonsterData({stats, type, features = [], saves = [], hp, da
             for (const change of energy.system.changes) change.value = `${stats.DpACalc}[${damageType}]`;
         }
     }
+    // Apply type features after optional attack typing: Corrosive Form is always Acid.
+    applyTypeFeature(actor, type, stats);
     return actor;
 }

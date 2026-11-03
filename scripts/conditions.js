@@ -64,37 +64,37 @@ export const CONDITIONS = [
     "id": "confused",
     "name": "Confused",
     "custom": true,
-    "rules": "<ul>\n <li>A confused creature can't take reactions.</li>\n <li>On its turn a confused creature rolls a d8 to determine what it does. \n <ul>\n <li>On a 1 to 4, a confused creature does nothing. </li>\n <li>On a 5 or 6, a confused creature takes no action or bonus action and uses all its movement to move in a randomly determined direction. </li>\n <li>On a 7 or 8, a confused creature makes a melee attack against a randomly determined creature within its reach or does nothing if it can't make such an attack.</li>\n </ul>\n </li>\n </ul>"
+    "rules": "<p>No Reactions. On each turn, roll a d8:</p><ul><li>1?4: Do nothing.</li><li>5?6: Take no Action or Bonus Action; use all movement in a random direction.</li><li>7?8: Make a melee attack against a random creature within reach, or do nothing if no attack is possible.</li></ul>"
   },
   {
     "id": "doomed",
     "name": "Doomed",
     "custom": true,
-    "rules": "<ul>\n<li>A doomed creature dies at a time determined by the GM, or within 13 (2d12) hours.</li>\n<li>A doomed creature continues to be doomed even after it dies. Magic equivalent to a 7th-level or higher spell can remove the doomed condition (such as regenerate cast on a living creature, resurrection, true resurrection, or wish).</li>\n</ul>"
+    "rules": "<p>Die after 13 (2d12) hours, or at a time set by the GM. Doomed persists after death. Removing it requires magic equivalent to a level 7 or higher spell, such as Regenerate on a living creature, Resurrection, True Resurrection, or Wish.</p>"
   },
   {
     "id": "rattled",
     "name": "Rattled",
     "custom": true,
-    "rules": "<ul>\n <li>A rattled creature cannot take reactions.</li>\n <li>A creature that is immune to being stunned is immune to being rattled.</li>\n </ul>"
+    "rules": "<p>No Reactions. Immunity to Stunned also grants immunity to Rattled.</p>"
   },
   {
     "id": "slowed",
     "name": "Slowed",
     "custom": true,
-    "rules": "<ul>\n <li>A slowed creature's Speed is halved.</li>\n <li>A slowed creature takes a −2 penalty to AC and Dexterity saving throws.</li>\n <li>A slowed creature cannot take reactions.</li>\n <li>On its turn, a slowed creature can take either an action or a bonus action, not both. In addition, it can't make more than one melee or ranged attack during its turn.</li>\n </ul>"
+    "rules": "<p>Speed is halved. Take ?2 to AC and Dexterity saves. No Reactions. Each turn, take an Action or a Bonus Action, and make no more than one melee or ranged attack.</p>"
   },
   {
     "id": "fatigue",
     "name": "Fatigue",
     "custom": true,
-    "rules": "<p>Various challenges, obstacles, and magics can lead to either fatigue or strife. An effect can give a creature one or more levels of fatigue or strife (detailed in the effect's description).</p>\n <p>If a creature suffering from fatigue or strife fails to resist another effect that causes a level of the tracked condition, its current level increases by the amount specified in the effect's description.</p>\n <p>A creature suffers the effect of its current level in a tracked condition as well as all lower levels. For example, a creature suffering level 3 fatigue has its Speed halved, it cannot Sprint, and it makes Strength, Dexterity, and Constitution checks with disadvantage.</p>\n <p>An effect that removes a tracked condition reduces its level as specified in the effect's description, with all tracked condition effects ending when a creature's condition level is reduced below 1.</p>\n <p>Finishing a long rest reduces a creature's fatigue and strife levels by 1.</p>\n<p>Fatigue represents exhaustion, exposure, hunger, injuries, and other physical factors which gradually wear a creature down. A creature which reaches the 7th level of the fatigue track becomes doomed and dies.</p>\n <p><strong>Fatigue Level Effects</strong></p>\n <ol>\n <li>Cannot dash.</li>\n <li>Disadvantage on Strength, Dexterity, and Constitution checks.</li>\n <li>Speed halved.</li>\n <li>Disadvantage on attack rolls and saving throws using Strength, Dexterity, or Constitution.</li>\n <li>Hit Dice halved.</li>\n <li>Speed reduced to 5 ft.</li>\n <li>Doomed.</li>\n </ol>"
+    "rules": "<p>Fatigue levels accumulate. Apply the current level and all lower levels. Effects add or remove the stated number of levels; below level 1, all Fatigue effects end. A Long Rest removes one level.</p><ol><li>Cannot Dash.</li><li>Disadvantage on Strength, Dexterity, and Constitution checks.</li><li>Speed halved.</li><li>Disadvantage on attack rolls and saves using Strength, Dexterity, or Constitution.</li><li>Hit Dice halved.</li><li>Speed reduced to 5 feet.</li><li>Doomed; the creature dies.</li></ol>"
   },
   {
     "id": "strife",
     "name": "Strife",
     "custom": true,
-    "rules": "<p>Various challenges, obstacles, and magics can lead to either fatigue or strife. An effect can give a creature one or more levels of fatigue or strife (detailed in the effect's description).</p>\n <p>If a creature suffering from fatigue or strife fails to resist another effect that causes a level of the tracked condition, its current level increases by the amount specified in the effect's description.</p>\n <p>A creature suffers the effect of its current level in a tracked condition as well as all lower levels. For example, a creature suffering level 3 fatigue has its Speed halved, it cannot Sprint, and it makes Strength, Dexterity, and Constitution checks with disadvantage.</p>\n <p>An effect that removes a tracked condition reduces its level as specified in the effect's description, with all tracked condition effects ending when a creature's condition level is reduced below 1.</p>\n <p>Finishing a long rest reduces a creature's fatigue and strife levels by 1.</p>\n<p>Strife represents corruption, despair, fear, loss of resolve, and other mental factors which gradually undo a creature's very soul. A creature which reaches the 7th level of the strife track suffers a special, permanent effect, which is either randomly selected or decided by the GM. This might involve the creature shutting down completely, or being impacted in such a way that it is forever changed.</p>\n <p><strong>Strife Level Effects</strong></p>\n <ol>\n<li>Disadvantage on Intelligence, Wisdom, and Charisma checks.</li>\n <li>Disadvantage on concentration checks.</li>\n <li>Can only take a bonus action or action each turn (not both).</li>\n <li>Disadvantage on attack rolls and saving throws using Intelligence, Wisdom, and Charisma.</li>\n <li>Suffer the effects of a randomly determined short-term mental stress effect.</li>\n <li>Cannot cast spells (but can cast cantrips).</li>\n <li>Suffer the effects of a randomly determined long-term mental stress effect.</li>\n </ol>"
+    "rules": "<p>Strife levels accumulate. Apply the current level and all lower levels. Effects add or remove the stated number of levels; below level 1, all Strife effects end. A Long Rest removes one level.</p><ol><li>Disadvantage on Intelligence, Wisdom, and Charisma checks.</li><li>Disadvantage on Concentration checks.</li><li>Take an Action or a Bonus Action each turn, not both.</li><li>Disadvantage on attack rolls and saves using Intelligence, Wisdom, or Charisma.</li><li>A random short-term mental stress effect.</li><li>Cannot cast spells other than cantrips.</li><li>A permanent effect chosen by the GM or determined randomly, such as a long-term mental stress effect.</li></ol>"
   }
 ];
 
@@ -105,11 +105,11 @@ export function conditionEffects(ids = []) {
         const condition = CONDITIONS[index];
         return {
             _id: `lmbCond${String(index).padStart(9, '0')}`,
-            name: condition.name + (condition.custom ? ' (reminder)' : ''),
+            name: condition.name,
             img: 'icons/svg/aura.svg', type: 'base', transfer: false,
             flags: {'lazy-monster-builder': {condition: condition.id, native: !condition.custom}},
             description: condition.custom
-                ? `<p><strong>Custom condition reminder.</strong> The GM manages its timing, levels, and consequences.</p>${condition.rules}`
+                ? `<p>The GM manages its timing, levels, and consequences.</p>${condition.rules}`
                 : `<p>Apply &Reference[${condition.id}] using the world's native D&amp;D 5e rules. The GM determines its duration.</p>`,
             system: {changes: [], rider: {statuses: condition.custom ? [] : [condition.id]}}
         };
